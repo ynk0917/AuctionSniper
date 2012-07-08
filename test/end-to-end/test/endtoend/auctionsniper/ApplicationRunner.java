@@ -6,6 +6,7 @@ import auctionsniper.MainWindow;
 public class ApplicationRunner {
     public static final String SNIPER_ID = "sniper";
     public static final String SINPER_PASSWORD = "sniper";
+    public static final String SNIPPER_XMPP_ID = SNIPER_ID + "@" + FakeAuctionSerevr.XMPP_HOSTNAME + "/Auction";
     private AuctionSniperDriver driver;
     
     public void startBiddingIn(final FakeAuctionSerevr auction) {
@@ -27,6 +28,10 @@ public class ApplicationRunner {
     
     public void showsSniperHasLostAuction() {
         driver.showsSniperStatus(MainWindow.STATUS_LOST);
+    }
+    
+    public void hasShownSniperIsBidding() {
+        driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
     }
     
     public void stop() {
