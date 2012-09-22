@@ -91,7 +91,7 @@ public class Main implements SniperListener {
     }
 
     @Override
-    public void sinperBidding() {
+    public void sniperBidding() {
         // TODO Auto-generated method stub
         
     }

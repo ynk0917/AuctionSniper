@@ -15,7 +15,7 @@ public class AuctionSniperTest {
     private final Mockery context = new Mockery();
     private final SniperListener sniperListener = context.mock(SniperListener.class);
     private final Auction auction = context.mock(Auction.class);
-    private final AuctionSniper sniper = new AuctionSniper(sniperListener);
+    private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
 
     @Test
     public void reportsLostWhenAuctionCloses() {
@@ -31,7 +31,7 @@ public class AuctionSniperTest {
         final int increment = 25;
         context.checking(new Expectations() {{
             one(auction).bid(price + increment);
-            atLeast(1).of(sniperListener).sinperBidding();
+            atLeast(1).of(sniperListener).sniperBidding();
         }});
         sniper.currentPrice(price, increment);
     }
