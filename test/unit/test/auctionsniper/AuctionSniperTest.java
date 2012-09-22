@@ -6,6 +6,7 @@ import org.jmock.integration.junit4.JMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
 
@@ -13,6 +14,7 @@ import auctionsniper.SniperListener;
 public class AuctionSniperTest {
     private final Mockery context = new Mockery();
     private final SniperListener sniperListener = context.mock(SniperListener.class);
+    private final Auction auction = context.mock(Auction.class);
     private final AuctionSniper sniper = new AuctionSniper(sniperListener);
 
     @Test
@@ -20,7 +22,17 @@ public class AuctionSniperTest {
         context.checking(new Expectations() {{
             one(sniperListener).sniperLost();
         }});
-        sniper.auctionCloesd();
+        sniper.auctionClosed();
     }
 
+    @Test
+    public void bidsHigherAndReportsBiddingWhenNewPriceArrives() {
+        final int price = 1001;
+        final int increment = 25;
+        context.checking(new Expectations() {{
+            one(auction).bid(price + increment);
+            atLeast(1).of(sniperListener).sinperBidding();
+        }});
+        sniper.currentPrice(price, increment);
+    }
 }

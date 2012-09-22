@@ -89,4 +89,10 @@ public class Main implements SniperListener {
             }
         });
     }
+
+    @Override
+    public void sinperBidding() {
+        // TODO Auto-generated method stub
+        
+    }
 }
