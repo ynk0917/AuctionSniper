@@ -5,7 +5,7 @@ import auctionsniper.MainWindow;
 
 public class ApplicationRunner {
     public static final String SNIPER_ID = "sniper";
-    public static final String SINPER_PASSWORD = "sniper";
+    public static final String SNIPER_PASSWORD = "sniper";
     public static final String SNIPPER_XMPP_ID = SNIPER_ID + "@" + FakeAuctionSerevr.XMPP_HOSTNAME + "/Auction";
     private AuctionSniperDriver driver;
     
@@ -14,7 +14,7 @@ public class ApplicationRunner {
             @Override
             public void run() {
                 try {
-                    Main.main(FakeAuctionSerevr.XMPP_HOSTNAME, SNIPER_ID, SINPER_PASSWORD, auction.getItemId());
+                    Main.main(FakeAuctionSerevr.XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, auction.getItemId());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -38,5 +38,13 @@ public class ApplicationRunner {
         if (null != driver) {
             driver.dispose();
         }
+    }
+
+    public void hasShownSniperIsWinning() {
+        driver.showsSniperStatus(MainWindow.STATUS_WINNING);
+    }
+
+    public void showsSniperHasWonAuction() {
+        driver.showsSniperStatus(MainWindow.STATUS_WON);
     }
 }
