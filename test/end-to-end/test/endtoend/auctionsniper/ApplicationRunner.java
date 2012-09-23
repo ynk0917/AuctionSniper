@@ -8,8 +8,10 @@ public class ApplicationRunner {
     public static final String SNIPER_PASSWORD = "sniper";
     public static final String SNIPPER_XMPP_ID = SNIPER_ID + "@" + FakeAuctionSerevr.XMPP_HOSTNAME + "/Auction";
     private AuctionSniperDriver driver;
+    private String itemId;
     
     public void startBiddingIn(final FakeAuctionSerevr auction) {
+        itemId = auction.getItemId();
         Thread thread = new Thread("Test Appliciation") {
             @Override
             public void run() {
@@ -34,17 +36,21 @@ public class ApplicationRunner {
         driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
     }
     
+    public void hasShownSniperIsBidding(int lastPrice, int lastBid) {
+        driver.showsSniperStatus(itemId, lastPrice, lastBid, MainWindow.STATUS_BIDDING);
+    }
+    
     public void stop() {
         if (null != driver) {
             driver.dispose();
         }
     }
 
-    public void hasShownSniperIsWinning() {
-        driver.showsSniperStatus(MainWindow.STATUS_WINNING);
+    public void hasShownSniperIsWinning(int winningBid) {
+        driver.showsSniperStatus(itemId, winningBid, winningBid, MainWindow.STATUS_WINNING);
     }
 
-    public void showsSniperHasWonAuction() {
-        driver.showsSniperStatus(MainWindow.STATUS_WON);
+    public void showsSniperHasWonAuction(int lastPrice) {
+        driver.showsSniperStatus(itemId, lastPrice, lastPrice, MainWindow.STATUS_WON);
     }
 }
