@@ -89,6 +89,19 @@ public class Main {
         public void sniperBidding() {
             showStatus(MainWindow.STATUS_BIDDING);
         }
+
+        @Override
+        public void sniperWinning() {
+            // TODO Auto-generated method stub
+            
+        }
+
+        @Override
+        public void sniperWon() {
+            // TODO Auto-generated method stub
+            
+        }
+        
         private void showStatus(final String status) {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -97,12 +110,5 @@ public class Main {
                 }
             });
         }
-
-        @Override
-        public void sniperWinning() {
-            // TODO Auto-generated method stub
-            
-        }
-        
     }
 }
