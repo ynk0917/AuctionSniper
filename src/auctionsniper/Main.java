@@ -26,7 +26,6 @@ public class Main {
     @SuppressWarnings("unused")
     private Chat notToBeGCd;
     public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
-    public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
     public static void main(String... args) throws Exception {
          Main main = new Main();
          main.joinAuction(
