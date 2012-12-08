@@ -28,6 +28,11 @@ public class SnipersTableModelTest {
     private final SnipersTableModel model = new SnipersTableModel();
 
     @Before
+    public void attchModelListener() {
+        model.addTableModelListener(listener);
+    }
+    
+    @Before
     public void hasEnoughColumns() {
         assertThat(model.getColumnCount(), equalTo(Column.values().length));
     }

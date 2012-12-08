@@ -59,7 +59,7 @@ public class AuctionSniperTest {
         final int increment = 25;
         final int bid = price + increment;
         context.checking(new Expectations() {{
-            one(auction).bid(price + increment);
+            one(auction).bid(bid);
             atLeast(1).of(sniperListener).sniperBidding(new SniperState(ITEM_ID, price, bid));
         }});
         sniper.currentPrice(price, increment, AuctionEventListener.PriceSource.FromOtherBidder);

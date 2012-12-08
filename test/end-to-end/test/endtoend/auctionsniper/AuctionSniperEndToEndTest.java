@@ -5,7 +5,8 @@ import org.junit.Test;
 
 public class AuctionSniperEndToEndTest {
 
-    private final FakeAuctionSerevr auction = new FakeAuctionSerevr("item-54321");
+    public static final String ITEM_ID = "item-54321";
+    private final FakeAuctionSerevr auction = new FakeAuctionSerevr(ITEM_ID);
     private final ApplicationRunner application = new ApplicationRunner();
     
     @Test
