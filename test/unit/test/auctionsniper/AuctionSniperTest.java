@@ -7,8 +7,6 @@ import org.jmock.integration.junit4.JMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import test.endtoend.auctionsniper.ApplicationRunner;
-
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.SniperState;
