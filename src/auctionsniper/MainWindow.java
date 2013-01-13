@@ -15,7 +15,6 @@ public class MainWindow extends JFrame {
     
     public static final String APPLICATION_TITLE = "Auction Sniper";
     public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
-    private static final String SNIPERS_TABLE_NAME = "Snipers Table";
 
     public static final String SNIPER_STATUS_NAME = "sniper status";
     public static final String STATUS_JOINING = "Joining";
@@ -23,15 +22,6 @@ public class MainWindow extends JFrame {
     public static final String STATUS_LOST = "Lost";
     public static final String STATUS_WINNING = "Winning";
     public static final String STATUS_WON = "Won";
-    
-    private final JLabel sniperStatus = createLabel(MainWindow.STATUS_JOINING);
-
-    private static JLabel createLabel(String initialText) {
-        JLabel result = new JLabel(initialText);
-        result.setName(SNIPER_STATUS_NAME);
-        result.setBorder(new LineBorder(Color.BLACK));
-        return result;
-    }
     
     public MainWindow() {
         super(APPLICATION_TITLE);
@@ -42,12 +32,8 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
     
-    public void showStatus(String status) {
-        snipers.setStatusText(status);
-    }
-    
-    public void sniperStatusChanged(SniperSnapshot sniperState, String statusText) {
-        snipers.sniperStatusChanged(sniperState, statusText);
+    public void sniperStatusChanged(SniperSnapshot snapshot) {
+        snipers.sniperStatusChanged(snapshot);
     }
     
     private void fillContentPane(JTable snipersTable) {
