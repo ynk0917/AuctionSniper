@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
-import auctionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
 import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
@@ -35,7 +35,7 @@ public class AuctionSniperTest {
     public void reportsLostIfAuctionClosesWhenBidding() {
         context.checking(new Expectations() {{
             ignoring(auction);
-            allowing(sniperListener).sniperBidding(with(any(SniperState.class))); then(sniperState.is("bidding"));
+            allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class))); then(sniperState.is("bidding"));
             atLeast(1).of(sniperListener).sniperLost(); when(sniperState.is("bidding"));
         }});
         sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
@@ -60,7 +60,7 @@ public class AuctionSniperTest {
         final int bid = price + increment;
         context.checking(new Expectations() {{
             one(auction).bid(bid);
-            atLeast(1).of(sniperListener).sniperBidding(new SniperState(ITEM_ID, price, bid));
+            atLeast(1).of(sniperListener).sniperBidding(new SniperSnapshot(ITEM_ID, price, bid));
         }});
         sniper.currentPrice(price, increment, AuctionEventListener.PriceSource.FromOtherBidder);
     }
