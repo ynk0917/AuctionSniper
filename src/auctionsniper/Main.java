@@ -22,6 +22,7 @@ public class Main {
     public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
     
     private MainWindow ui;
+    private final SnipersTableModel snipers = new SnipersTableModel();
     
     @SuppressWarnings("unused")
     private Chat notToBeGCd;
@@ -38,7 +39,7 @@ public class Main {
         final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection), null);
         notToBeGCd = chat;
         Auction auction = new XMPPAuction(chat);
-        chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(), new AuctionSniper(auction, new SniperStateDisplayer(), itemId)));
+        chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(), new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
         auction.join();
     }
     
@@ -72,15 +73,26 @@ public class Main {
         SwingUtilities.invokeAndWait(new Runnable() {
             @Override
             public void run() {
-                ui = new MainWindow();
+                ui = new MainWindow(snipers);
             }
         });
     }
     
-    public class SniperStateDisplayer implements SniperListener {
+    public class SwingThreadSniperListener implements SniperListener {
+        SnipersTableModel snipers;
+        public SwingThreadSniperListener(SnipersTableModel snipers) {
+            this.snipers = snipers;
+        }
+        
         @Override
-        public void sniperStateChanged(SniperSnapshot snapshot) {
-            ui.sniperStatusChanged(snapshot);
+        public void sniperStateChanged(final SniperSnapshot snapshot) {
+            SwingUtilities.invokeLater(new Runnable () {
+                @Override
+                public void run() {
+                    snipers.sniperStatusChanged(snapshot);
+                }
+                
+            });
         }
     }
 }

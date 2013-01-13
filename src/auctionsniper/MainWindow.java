@@ -11,7 +11,6 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 
 public class MainWindow extends JFrame {
-    private final SnipersTableModel snipers = new SnipersTableModel();
     
     public static final String APPLICATION_TITLE = "Auction Sniper";
     public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
@@ -23,17 +22,13 @@ public class MainWindow extends JFrame {
     public static final String STATUS_WINNING = "Winning";
     public static final String STATUS_WON = "Won";
     
-    public MainWindow() {
+    public MainWindow(SnipersTableModel snipers) {
         super(APPLICATION_TITLE);
         setName(MAIN_WINDOW_NAME);
-        fillContentPane(makeSnipersTable());
+        fillContentPane(makeSnipersTable(snipers));
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-    }
-    
-    public void sniperStatusChanged(SniperSnapshot snapshot) {
-        snipers.sniperStatusChanged(snapshot);
     }
     
     private void fillContentPane(JTable snipersTable) {
@@ -42,7 +37,7 @@ public class MainWindow extends JFrame {
         contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
     }
     
-    private JTable makeSnipersTable() {
+    private JTable makeSnipersTable(SnipersTableModel snipers) {
         final JTable snipersTable = new javax.swing.JTable(snipers);
         snipersTable.setName("");
         return snipersTable;
