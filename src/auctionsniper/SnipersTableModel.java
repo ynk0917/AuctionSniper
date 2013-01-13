@@ -26,7 +26,7 @@ public class SnipersTableModel extends AbstractTableModel {
             return sniperState.lastPrice;
         case LAST_BID:
             return sniperState.lastBid;
-        case SNIPER_STATUS:
+        case SNIPER_STATE:
             return statusText;
         default:
             throw new IllegalArgumentException("No column at " + columnIndex);
