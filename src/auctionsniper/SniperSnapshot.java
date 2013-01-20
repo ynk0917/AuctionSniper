@@ -47,4 +47,7 @@ public class SniperSnapshot {
       return ToStringBuilder.reflectionToString(this);
     }
 
+    public boolean isForSameItemAs(SniperSnapshot sniperSnapshot) {
+        return itemId.equals(sniperSnapshot.itemId);
+    }
 }
