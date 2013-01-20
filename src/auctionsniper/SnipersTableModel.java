@@ -22,7 +22,7 @@ public class SnipersTableModel extends AbstractTableModel {
         return Column.at(columnIndex).valueIn(snapshot);
     }
     
-    static String textFor(SniperState state) {
+    public static String textFor(SniperState state) {
         return STATUS_TEXT[state.ordinal()];
     }
     
