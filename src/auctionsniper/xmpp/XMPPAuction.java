@@ -1,4 +1,4 @@
-package auctionsniper.xmp;
+package auctionsniper.xmpp;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
@@ -17,9 +17,9 @@ public class XMPPAuction implements Auction {
         chat = connection.getChatManager().createChat(auctionId(itemId, connection), 
                 new AuctionMessageTranslator(connection.getUser(), auctionEventListeners.announce()));
     }
-
+    
     private static String auctionId(String itemId, XMPPConnection connection) {
-        return String.format(Main.AUCTION_ID_FORMAT, itemId, connection.getServiceName());
+        return String.format(XMPPAuctionHouse.AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
     
     @Override
@@ -29,7 +29,7 @@ public class XMPPAuction implements Auction {
 
     @Override
     public void join() {
-        sendMessage(Main.JOIN_COMMAND_FORMAT);
+        sendMessage(XMPPAuctionHouse.JOIN_COMMAND_FORMAT);
     }
     
     private void sendMessage(final String message) {

@@ -16,6 +16,7 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.Main;
+import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class FakeAuctionSerevr {
     public static final String ITEM_ID_AS_LOGIN = "auction-%s";
@@ -47,7 +48,7 @@ public class FakeAuctionSerevr {
     }
     
     public void hasReceivedJoinRequestFromSniper(String sniperId) throws InterruptedException {
-        receivesAMessageMatching(sniperId, equalTo(Main.JOIN_COMMAND_FORMAT));
+        receivesAMessageMatching(sniperId, equalTo(XMPPAuctionHouse.JOIN_COMMAND_FORMAT));
     }
     
     public void announceColsed() throws XMPPException {

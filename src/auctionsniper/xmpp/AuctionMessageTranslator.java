@@ -1,4 +1,4 @@
-package auctionsniper.xmp;
+package auctionsniper.xmpp;
 
 import java.util.HashMap;
 import java.util.Map;
