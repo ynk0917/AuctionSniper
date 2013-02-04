@@ -26,7 +26,7 @@ public class Main {
     private MainWindow ui;
     private final SnipersTableModel snipers = new SnipersTableModel();
     
-    private List<Chat> notToBeGCd = new ArrayList<Chat>();
+    private List<Auction> notToBeGCd = new ArrayList<Auction>();
     public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
     public static void main(String... args) throws Exception {
          Main main = new Main();
@@ -41,10 +41,10 @@ public class Main {
             @Override
             public void joinAuction(String itemId) {
                 snipers.addSniper(SniperSnapshot.joining(itemId));
-                Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection), null);
-                notToBeGCd.add(chat);
-                Auction auction = new XMPPAuction(chat);
-                chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(), new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers))));
+                Announcer<AuctionEventListener> auctionEventListeners = Announcer.to(AuctionEventListener.class);
+                Auction auction = new XMPPAuction(connection, itemId);
+                notToBeGCd.add(auction);
+                auction.addAuctionEventListener(new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
                 auction.join();
             }
         });
@@ -68,9 +68,6 @@ public class Main {
         return connection;
     }
     
-    private static String auctionId(String itemId, XMPPConnection connection) {
-        return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
-    }
     
     public Main() throws Exception {
         startUserInterface();
