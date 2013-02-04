@@ -8,7 +8,7 @@ import auctionsniper.SnipersTableModel;
 public class ApplicationRunner {
     public static final String SNIPER_ID = "sniper";
     public static final String SNIPER_PASSWORD = "sniper";
-    public static final String SNIPPER_XMPP_ID = SNIPER_ID + "@" + FakeAuctionSerevr.XMPP_HOSTNAME + "/Auction";
+    public static final String SNIPER_XMPP_ID = SNIPER_ID + "@" + FakeAuctionSerevr.XMPP_HOSTNAME + "/Auction";
     private AuctionSniperDriver driver;
     
     public void startBiddingIn(final FakeAuctionSerevr... auctions) {

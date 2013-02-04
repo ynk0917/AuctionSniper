@@ -11,6 +11,8 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
+import auctionsniper.xmp.XMPPAuction;
+
 public class Main {
 
     private static final int ARG_HOSTNAME = 0;
