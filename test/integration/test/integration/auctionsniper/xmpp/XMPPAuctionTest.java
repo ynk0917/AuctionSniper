@@ -1,4 +1,4 @@
-package test.integration.auctionsniper;
+package test.integration.auctionsniper.xmpp;
 
 import java.util.concurrent.CountDownLatch;
 
